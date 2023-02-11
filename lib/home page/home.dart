@@ -21,6 +21,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   CollectionReference Detabase =
       FirebaseFirestore.instance.collection('Detabase');
+      final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance.collection('users').snapshots();
   Stream<QuerySnapshot> getData() {
     return Detabase.snapshots();
   }
@@ -73,25 +74,26 @@ class _HomeState extends State<Home> {
         body: Container(
           padding: EdgeInsets.all(30),
           child: StreamBuilder<QuerySnapshot>(
-            stream: getData(),
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-              final int dataCount = snapshot.data!.docs.length;
-              return ListView.builder(
-                itemCount: dataCount,
-                itemBuilder: (context, index) {
-                  final DocumentSnapshot document = snapshot.data!.docs[index];
+      stream: _usersStream,
+      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        if (snapshot.hasError) {
+          return Text('Something went wrong');
+        }
 
-                  return ListTile(
-                    title: Text(document['detals']),
-                    subtitle: Text(document['location']),
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Text("Loading");
+        }
+
+        return ListView(
+          children: snapshot.data!.docs.map((DocumentSnapshot document) {
+          Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
+            return ListTile(
+              title: Text(data['detals']),
+              subtitle: Text(data['location']),
                   );
                 },
-              );
+              ).toList(),
+        );
             },
           ),
         ),

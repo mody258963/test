@@ -64,13 +64,13 @@ class MovieItem extends StatelessWidget {
   /// Returns a list of genre movie tags.
   List<Widget> get genreItems {
     return [
-      for (final genre in movie!.detals ?? <String>[])
+      for (final location in movie!.detals ?? <String>[])
         Padding(
           padding: const EdgeInsets.only(right: 2),
           child: Chip(
             backgroundColor: Colors.lightBlue,
             label: Text(
-              genre,
+              location,
               style: const TextStyle(color: Colors.white),
             ),
           ),

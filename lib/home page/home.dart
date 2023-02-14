@@ -92,7 +92,8 @@ class _HomeState extends State<Home> {
                   (DocumentSnapshot document) {
                     Map<String, dynamic>? data =
                         document.data() as Map<String, dynamic>;
-                    return MovieItem(data[Index]);
+                    return Text(
+                        "Full Name: ${data['location']} ${data['detals']}");
                   },
                 ).toList(),
               );

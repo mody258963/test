@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:realstate/home%20page/addingpage.dart';
+import 'package:realstate/home%20page/inkwall.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../account page/account page.dart';
@@ -21,7 +22,8 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   CollectionReference Detabase =
       FirebaseFirestore.instance.collection('Detabase');
-      final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance.collection('users').snapshots();
+  final Stream<QuerySnapshot> _usersStream =
+      FirebaseFirestore.instance.collection('Detabase').snapshots();
   Stream<QuerySnapshot> getData() {
     return Detabase.snapshots();
   }
@@ -74,26 +76,26 @@ class _HomeState extends State<Home> {
         body: Container(
           padding: EdgeInsets.all(30),
           child: StreamBuilder<QuerySnapshot>(
-      stream: _usersStream,
-      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if (snapshot.hasError) {
-          return Text('Something went wrong');
-        }
+            stream: _usersStream,
+            builder:
+                (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+              if (snapshot.hasError) {
+                return Text('Something went wrong');
+              }
 
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Text("Loading");
-        }
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Text("Loading");
+              }
 
-        return ListView(
-          children: snapshot.data!.docs.map((DocumentSnapshot document) {
-          Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
-            return ListTile(
-              title: Text(data['detals']),
-              subtitle: Text(data['location']),
-                  );
-                },
-              ).toList(),
-        );
+              return ListView(
+                children: snapshot.data!.docs.map(
+                  (DocumentSnapshot document) {
+                    Map<String, dynamic>? data =
+                        document.data() as Map<String, dynamic>;
+                    return MovieItem(data[Index]);
+                  },
+                ).toList(),
+              );
             },
           ),
         ),

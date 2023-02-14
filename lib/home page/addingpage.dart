@@ -47,7 +47,7 @@ class _AddingpageState extends State<Addingpage> {
       "location": location.text, // John Doe
       "detals": detals.text, // Stokes and Sons
       "expectedprice": expectedprice.text,
-      "expected rent": expectedrent.text,
+      "expectedrent": expectedrent.text,
       "image": imageUrl,
       // "proparty id" :
     })

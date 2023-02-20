@@ -393,6 +393,7 @@ class _AddingpageState extends State<Addingpage> {
                             },
                             child: DummyText(
                               text: "Add Proberty",
+                              size: 15,
                             ),
                             style: ElevatedButton.styleFrom(
                               alignment: Alignment.center,

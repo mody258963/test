@@ -147,6 +147,7 @@ class _LoginPageState extends State<LoginPage> {
                     },
                     child: DummyText(
                       text: "Sign In",
+                      size: 10,
                     ),
                     style: ElevatedButton.styleFrom(
                       alignment: Alignment.center,
@@ -161,7 +162,7 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(
                     height: 20,
                   ),
-                  const DummyText(text: "Or"),
+                  const DummyText(text: "Or", size: 6),
                   const Padding(
                     padding: EdgeInsets.only(
                       bottom: 20,
@@ -189,7 +190,10 @@ class _LoginPageState extends State<LoginPage> {
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) => SignUpPage()));
                           },
-                          child: DummyText(text: "Sign Up")),
+                          child: DummyText(
+                            text: "Sign Up",
+                            size: 6,
+                          )),
                     ),
                   ],
                 ),

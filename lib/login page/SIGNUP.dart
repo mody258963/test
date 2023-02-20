@@ -209,6 +209,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         },
                         child: DummyText(
                           text: "Sign Up",
+                          size: 9,
                         ),
                         style: ElevatedButton.styleFrom(
                           alignment: Alignment.center,

@@ -53,7 +53,10 @@ class AccountPage extends StatelessWidget {
                         padding: const EdgeInsets.all(20),
                         child: Column(
                           children: const [
-                            DummyText(text: "Mohamed Ashmawy"),
+                            DummyText(
+                              text: "Mohamed Ashmawy",
+                              size: 10,
+                            ),
                             Text('@user name')
                           ],
                         ),

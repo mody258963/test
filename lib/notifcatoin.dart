@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:realstate/app%20settings/text%20sittings.dart';
 import 'account page/account page.dart';
 import 'account page/account page.dart';
+import 'app settings/textsetting.dart';
 
 class notifcation extends StatelessWidget {
   const notifcation({Key? key}) : super(key: key);
@@ -82,19 +83,29 @@ class notifcation extends StatelessWidget {
                           padding: const EdgeInsets.all(15),
                           child: Row(
                             children: [
-                              Container(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.04,
-                                width: MediaQuery.of(context).size.width * 0.25,
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(5),
-                                    border: Border.all(color: Colors.grey)),
+                              Positioned(
+                                top: MediaQuery.of(context).size.height * 0.24,
+                                left:
+                                    MediaQuery.of(context).size.height * 0.165,
+                                child: FittedBox(
+                                  child: Container(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.04,
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          border:
+                                              Border.all(color: Colors.grey)),
+                                      child: DummyText2(
+                                        icon1: Icon(Icons.storefront, size: 20),
+                                        text1: ' Masr El-G',
+                                        text: ' ',
+                                      )),
+                                ),
                               ),
-                              Padding(
-                                  padding: EdgeInsets.only(
-                                right: 5,
-                              )),
+                              Padding(padding: EdgeInsets.only(left: 10)),
                               Container(
                                   height:
                                       MediaQuery.of(context).size.height * 0.04,
@@ -104,10 +115,22 @@ class notifcation extends StatelessWidget {
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(5),
                                       border: Border.all(color: Colors.grey)),
-                                  child: DummyText(text: "location")),
+                                  child: const DummyText2(
+                                    icon1: Icon(Icons.storefront, size: 20),
+                                    text1: '  Store',
+                                    text: ' ',
+                                  )),
                             ],
                           ),
                         ),
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.83,
+                          child: DummyText(
+                            text:
+                                "Store in craft zone 100m^2 dfsdfdsf sdvgfsdf dsfsdf dsfdf ",
+                            size: 22,
+                          ),
+                        )
                       ],
                     ),
                   ),

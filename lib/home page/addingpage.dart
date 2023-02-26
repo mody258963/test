@@ -42,6 +42,9 @@ class _AddingpageState extends State<Addingpage> {
   PickedFile? file;
   String? uuid = " ";
   List<File>? images = [];
+  String countryValue = "";
+  String stateValue = "";
+  String cityValue = "";
 
   Future<void> addUser() {
     return Detabase.add({
@@ -85,22 +88,40 @@ class _AddingpageState extends State<Addingpage> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    CSCPicker(
-                      countryFilter: [CscCountry.Egypt],
-                      showCities: true,
-                      showStates: true,
-                      flagState: CountryFlag.DISABLE,
-                      dropdownDecoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                          color: Colors.white,
-                          border: Border.all(
-                              color: Colors.grey.shade300, width: 1)),
-                      dropdownHeadingStyle: TextStyle(
-                          color: Colors.black,
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold),
-                      dropdownDialogRadius: 30,
-                      searchBarRadius: 30,
+                    Padding(
+                      padding: const EdgeInsets.all(15),
+                      child: CSCPicker(
+                        onCountryChanged: (value) {
+                          setState(() {
+                            countryValue = value;
+                          });
+                        },
+                        onStateChanged: (value) {
+                          setState(() {
+                            stateValue = value!;
+                          });
+                        },
+                        onCityChanged: (value) {
+                          setState(() {
+                            cityValue = value!;
+                          });
+                        },
+                        countryFilter: [CscCountry.Egypt],
+                        showCities: true,
+                        showStates: true,
+                        flagState: CountryFlag.DISABLE,
+                        dropdownDecoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            color: Colors.white,
+                            border: Border.all(
+                                color: Colors.grey.shade300, width: 1)),
+                        dropdownHeadingStyle: TextStyle(
+                            color: Colors.black,
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold),
+                        dropdownDialogRadius: 30,
+                        searchBarRadius: 30,
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(
@@ -373,12 +394,14 @@ class _AddingpageState extends State<Addingpage> {
                                 downloadUrls.add(url);
                                 if (i == images!.length - 1) {
                                   storeEntry(
-                                    downloadUrls,
-                                    location.text,
-                                    detals.text,
-                                    expectedprice.text,
-                                    expectedrent.text,
-                                  );
+                                      downloadUrls,
+                                      location.text,
+                                      detals.text,
+                                      expectedprice.text,
+                                      expectedrent.text,
+                                      countryValue,
+                                      stateValue,
+                                      cityValue);
                                 }
                               }
                             },
@@ -433,8 +456,8 @@ class _AddingpageState extends State<Addingpage> {
     return url;
   }
 
-  storeEntry(
-      List<String> imageUrls, String loc, String det, String pho, String ex) {
+  storeEntry(List<String> imageUrls, String loc, String det, String pho,
+      String ex, String con, String sta, String cit) {
     FirebaseFirestore.instance.collection('Detabase').add({
       'image': imageUrls,
       "uuid": FirebaseAuth.instance.currentUser?.uid,
@@ -442,6 +465,9 @@ class _AddingpageState extends State<Addingpage> {
       "detals": det, // Stokes and Sons
       "phone number": pho,
       "expectedrent": ex,
+      "contary": con,
+      "State": sta,
+      "City": cit
     }).then((value) {});
   }
 }

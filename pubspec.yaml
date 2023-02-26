@@ -55,7 +55,8 @@ dependencies:
   json_annotation: ^4.8.0
   cloud_firestore_odm: ^1.0.0-dev.46
   auto_size_text: ^3.0.0
-
+  csc_picker: ^0.2.7
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -43,8 +43,8 @@ class _AddingpageState extends State<Addingpage> {
   String? uuid = " ";
   List<File>? images = [];
   String countryValue = "";
-  String stateValue = "";
-  String cityValue = "";
+  String? stateValue = "";
+  String? cityValue = "";
 
   Future<void> addUser() {
     return Detabase.add({
@@ -88,44 +88,50 @@ class _AddingpageState extends State<Addingpage> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(15),
-                      child: CSCPicker(
-                        onCountryChanged: (value) {
-                          setState(() {
-                            countryValue = value;
-                          });
-                        },
-                        onStateChanged: (value) {
-                          setState(() {
-                            stateValue = value!;
-                          });
-                        },
-                        onCityChanged: (value) {
-                          setState(() {
-                            cityValue = value!;
-                          });
-                        },
-                        countryFilter: [CscCountry.Egypt],
-                        showCities: true,
-                        showStates: true,
-                        flagState: CountryFlag.DISABLE,
-                        dropdownDecoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            color: Colors.white,
-                            border: Border.all(
-                                color: Colors.grey.shade300, width: 1)),
-                        dropdownHeadingStyle: TextStyle(
-                            color: Colors.black,
-                            fontSize: 17,
-                            fontWeight: FontWeight.bold),
-                        dropdownDialogRadius: 30,
-                        searchBarRadius: 30,
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.90,
+                      height: MediaQuery.of(context).size.height * 0.14,
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            top: 20, bottom: 0, left: 20, right: 20),
+                        child: CSCPicker(
+                          onCountryChanged: (value) {
+                            setState(() {
+                              countryValue = value;
+                            });
+                          },
+                          onStateChanged: (value) {
+                            setState(() {
+                              stateValue = value;
+                            });
+                          },
+                          onCityChanged: (value) {
+                            setState(() {
+                              cityValue = value;
+                            });
+                          },
+                          countryFilter: [CscCountry.Egypt],
+                          showCities: true,
+                          showStates: true,
+                          flagState: CountryFlag.DISABLE,
+                          dropdownDecoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                              color: Colors.white,
+                              border: Border.all(
+                                  color: Colors.grey.shade300, width: 1)),
+                          dropdownHeadingStyle: TextStyle(
+                              color: Colors.black,
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold),
+                          dropdownDialogRadius: 30,
+                          searchBarRadius: 30,
+                        ),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(
-                        top: 60,
+                        top: 10,
                       ),
                       child: Padding(
                         padding: const EdgeInsets.only(
@@ -283,88 +289,92 @@ class _AddingpageState extends State<Addingpage> {
                                   height: 200,
                                   color: Colors.white70,
                                   child: Center(
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: <Widget>[
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                            right: 180,
-                                            top: 20,
-                                          ),
-                                          child: TextButton.icon(
-                                              label: const Text('Camara',
-                                                  style: TextStyle(
-                                                    fontSize: 35,
-                                                    color: Colors.black,
-                                                  )),
-                                              onPressed: () async {
-                                                Navigator.pop(context);
-                                                ImagePicker imagePicker =
-                                                    ImagePicker();
-                                                XFile? file =
-                                                    await imagePicker.pickImage(
-                                                        source:
-                                                            ImageSource.camera);
-                                                print('${file?.path}');
-                                                if (file == null) return;
-
-                                                String uniqueFileName =
-                                                    DateTime.now()
-                                                        .millisecondsSinceEpoch
-                                                        .toString();
-
-                                                Reference referenceDiImages =
-                                                    FirebaseStorage.instance
-                                                        .ref()
-                                                        .child('files');
-
-                                                Reference
-                                                    referenceImagetouplod =
-                                                    referenceDiImages
-                                                        .child(uniqueFileName);
-                                                var formdata =
-                                                    formstate.currentState;
-
-                                                if (formdata!.validate()) {
-                                                  try {
-                                                    await referenceImagetouplod
-                                                        .putFile(
-                                                            File(file.path));
-
-                                                    imageUrl =
-                                                        await referenceImagetouplod
-                                                            .getDownloadURL();
-                                                  } catch (error) {}
-                                                }
-                                              },
-                                              icon: Icon(
-                                                Icons.photo_camera,
-                                                size: 35,
-                                                color: Colors.black,
-                                              )),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                            right: 190,
-                                            top: 30,
-                                          ),
-                                          child: TextButton.icon(
-                                              label: const Text('Gallary',
-                                                  style: TextStyle(
+                                    child: Expanded(
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: <Widget>[
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              right: 180,
+                                              top: 20,
+                                            ),
+                                            child: TextButton.icon(
+                                                label: const Text('Camara',
+                                                    style: TextStyle(
                                                       fontSize: 35,
-                                                      color: Colors.black)),
-                                              onPressed: () async {
-                                                getMultipImage();
-                                              },
-                                              icon: Icon(
-                                                Icons
-                                                    .photo_size_select_actual_outlined,
-                                                size: 35,
-                                                color: Colors.black,
-                                              )),
-                                        ),
-                                      ],
+                                                      color: Colors.black,
+                                                    )),
+                                                onPressed: () async {
+                                                  Navigator.pop(context);
+                                                  ImagePicker imagePicker =
+                                                      ImagePicker();
+                                                  XFile? file =
+                                                      await imagePicker
+                                                          .pickImage(
+                                                              source:
+                                                                  ImageSource
+                                                                      .camera);
+                                                  print('${file?.path}');
+                                                  if (file == null) return;
+
+                                                  String uniqueFileName =
+                                                      DateTime.now()
+                                                          .millisecondsSinceEpoch
+                                                          .toString();
+
+                                                  Reference referenceDiImages =
+                                                      FirebaseStorage.instance
+                                                          .ref()
+                                                          .child('files');
+
+                                                  Reference
+                                                      referenceImagetouplod =
+                                                      referenceDiImages.child(
+                                                          uniqueFileName);
+                                                  var formdata =
+                                                      formstate.currentState;
+
+                                                  if (formdata!.validate()) {
+                                                    try {
+                                                      await referenceImagetouplod
+                                                          .putFile(
+                                                              File(file.path));
+
+                                                      imageUrl =
+                                                          await referenceImagetouplod
+                                                              .getDownloadURL();
+                                                    } catch (error) {}
+                                                  }
+                                                },
+                                                icon: Icon(
+                                                  Icons.photo_camera,
+                                                  size: 35,
+                                                  color: Colors.black,
+                                                )),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              right: 190,
+                                              top: 30,
+                                            ),
+                                            child: TextButton.icon(
+                                                label: const Text('Gallary',
+                                                    style: TextStyle(
+                                                        fontSize: 35,
+                                                        color: Colors.black)),
+                                                onPressed: () async {
+                                                  getMultipImage();
+                                                },
+                                                icon: Icon(
+                                                  Icons
+                                                      .photo_size_select_actual_outlined,
+                                                  size: 35,
+                                                  color: Colors.black,
+                                                )),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 );
@@ -389,19 +399,22 @@ class _AddingpageState extends State<Addingpage> {
                         height: MediaQuery.of(context).size.height * 0.08,
                         child: ElevatedButton(
                             onPressed: () async {
-                              for (int i = 0; i < images!.length; i++) {
-                                String url = await uploadFile(images![i]);
-                                downloadUrls.add(url);
-                                if (i == images!.length - 1) {
-                                  storeEntry(
-                                      downloadUrls,
-                                      location.text,
-                                      detals.text,
-                                      expectedprice.text,
-                                      expectedrent.text,
-                                      countryValue,
-                                      stateValue,
-                                      cityValue);
+                              var formdata = formstate.currentState;
+                              if (formdata!.validate()) {
+                                for (int i = 0; i < images!.length; i++) {
+                                  String url = await uploadFile(images![i]);
+                                  downloadUrls.add(url);
+                                  if (i == images!.length - 1) {
+                                    storeEntry(
+                                        downloadUrls,
+                                        location.text,
+                                        detals.text,
+                                        expectedprice.text,
+                                        expectedrent.text,
+                                        countryValue,
+                                        stateValue,
+                                        cityValue);
+                                  }
                                 }
                               }
                             },
@@ -457,7 +470,7 @@ class _AddingpageState extends State<Addingpage> {
   }
 
   storeEntry(List<String> imageUrls, String loc, String det, String pho,
-      String ex, String con, String sta, String cit) {
+      String ex, String con, String? sta, String? cit) {
     FirebaseFirestore.instance.collection('Detabase').add({
       'image': imageUrls,
       "uuid": FirebaseAuth.instance.currentUser?.uid,

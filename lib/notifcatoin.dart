@@ -59,22 +59,19 @@ class notifcation extends StatelessWidget {
                         Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
-                            Expanded(
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(0),
-                                  bottomRight: Radius.circular(0),
-                                  topLeft: Radius.circular(15),
-                                  topRight: Radius.circular(15),
-                                ),
-                                child: Image.network(
-                                  "https://www.shutterstock.com/shutterstock/photos/2070995981/display_1500/stock-vector-cyber-or-web-security-digital-data-protection-and-database-safety-bugs-correction-pentesting-and-2070995981.jpg",
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.20,
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.90,
-                                  fit: BoxFit.cover,
-                                ),
+                            ClipRRect(
+                              borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(0),
+                                bottomRight: Radius.circular(0),
+                                topLeft: Radius.circular(15),
+                                topRight: Radius.circular(15),
+                              ),
+                              child: Image.network(
+                                "https://www.shutterstock.com/shutterstock/photos/2070995981/display_1500/stock-vector-cyber-or-web-security-digital-data-protection-and-database-safety-bugs-correction-pentesting-and-2070995981.jpg",
+                                height:
+                                    MediaQuery.of(context).size.height * 0.20,
+                                width: MediaQuery.of(context).size.width * 0.90,
+                                fit: BoxFit.cover,
                               ),
                             ),
                           ],
@@ -83,28 +80,21 @@ class notifcation extends StatelessWidget {
                           padding: const EdgeInsets.all(15),
                           child: Row(
                             children: [
-                              Positioned(
-                                top: MediaQuery.of(context).size.height * 0.24,
-                                left:
-                                    MediaQuery.of(context).size.height * 0.165,
-                                child: FittedBox(
-                                  child: Container(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.04,
-                                      decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                          border:
-                                              Border.all(color: Colors.grey)),
-                                      child: DummyText2(
-                                        icon1: Icon(Icons.storefront, size: 20),
-                                        text1: ' Masr El-G',
-                                        text: ' ',
-                                      )),
-                                ),
-                              ),
+                              Container(
+                                  constraints: BoxConstraints(
+                                    maxWidth: double.infinity,
+                                  ),
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.04,
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(5),
+                                      border: Border.all(color: Colors.grey)),
+                                  child: DummyText2(
+                                    icon1: Icon(Icons.storefront, size: 20),
+                                    text1: ' Masr El-Gsddf',
+                                    text: ' ',
+                                  )),
                               Padding(padding: EdgeInsets.only(left: 10)),
                               Container(
                                   height:

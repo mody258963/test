@@ -410,7 +410,7 @@ class _AddingpageState extends State<Addingpage> {
                                         location.text,
                                         detals.text,
                                         expectedprice.text,
-                                        expectedrent.text,
+                                        int.parse(expectedrent.text),
                                         countryValue,
                                         stateValue,
                                         cityValue);
@@ -469,8 +469,8 @@ class _AddingpageState extends State<Addingpage> {
     return url;
   }
 
-  storeEntry(List<String> imageUrls, String loc, String det, String pho,
-      String ex, String con, String? sta, String? cit) {
+  storeEntry(List<String> imageUrls, String loc, String det, String pho, int ex,
+      String con, String? sta, String? cit) {
     FirebaseFirestore.instance.collection('Detabase').add({
       'image': imageUrls,
       "uuid": FirebaseAuth.instance.currentUser?.uid,

@@ -13,14 +13,24 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   Stream<QuerySnapshot>? changer;
-  CollectionReference Detabase =
-      FirebaseFirestore.instance.collection('Detabase');
-  bool sany = false;
+  bool show = false;
+  Stream<QuerySnapshot>? Detabase =
+      FirebaseFirestore.instance.collection('Detabase').snapshots();
+  Stream<QuerySnapshot> filterDatabase(int minPrice, int maxPrice) {
+    return FirebaseFirestore.instance
+        .collection('Detabase')
+        .where('expectedrent', isGreaterThanOrEqualTo: minPrice)
+        .where('expectedrent', isLessThanOrEqualTo: maxPrice)
+        .snapshots();
+  }
 
-  Stream<QuerySnapshot> snapshot = FirebaseFirestore.instance
-      .collection('Detabase')
-      .orderBy('expectedrent', descending: false)
-      .snapshots();
+  Stream<QuerySnapshot> increment() {
+    if (show == false) {
+      return FirebaseFirestore.instance.collection('Detabase').snapshots();
+    } else {
+      return filterDatabase(100, 800);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,8 +82,9 @@ class _HomeState extends State<Home> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
+                  height: 200,
                   child: StreamBuilder<QuerySnapshot>(
-                    stream: incrment(),
+                    stream: increment(),
                     builder: (BuildContext context,
                         AsyncSnapshot<QuerySnapshot> snapshot) {
                       if (snapshot.hasError) {
@@ -99,21 +110,15 @@ class _HomeState extends State<Home> {
                 ),
                 ElevatedButton(
                     onPressed: () async {
-                      sany = !sany;
+                      setState(() {
+                        show = !show;
+                        Detabase = filterDatabase(100, 800);
+                      });
                     },
                     child: Text("dsddsfds"))
               ],
             ),
           ),
         ));
-  }
-
-  incrment() {
-    if (sany != !sany) {
-      return FirebaseFirestore.instance
-          .collection('Detabase')
-          .orderBy('expectedrent', descending: false)
-          .snapshots();
-    }
   }
 }

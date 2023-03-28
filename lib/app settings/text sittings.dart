@@ -10,16 +10,14 @@ class DummyText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Text(
-        text,
-        maxLines: 3,
-        style: TextStyle(
-          color: Colors.black,
-          fontFamily: 'Montserrat',
-          fontWeight: FontWeight.bold,
-          fontSize: size,
-        ),
+    return Text(
+      text,
+      maxLines: 3,
+      style: TextStyle(
+        color: Colors.black,
+        fontFamily: 'Montserrat',
+        fontWeight: FontWeight.bold,
+        fontSize: size,
       ),
     );
   }

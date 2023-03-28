@@ -1,9 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:realstate/account%20page/bank%20accounts.dart';
 import 'package:realstate/account%20page/personal%20details.dart';
-import 'package:realstate/login%20page/login.dart';
 import '../app settings/dumyboutton.dart';
 import '../app settings/text sittings.dart';
 
